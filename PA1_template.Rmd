@@ -139,7 +139,7 @@ modActivity <- merge(activity, avgIntervalSteps, by = "interval", all.x = TRUE)
 modActivity[is.na(modActivity$steps), c("steps")] <- modActivity[is.na(modActivity$steps), c("stepsMean")]
 modActivity <- select(modActivity, steps, date, interval)
 modActivity <- arrange(modActivity, date, interval)
-modActivity$date <- as.Date(modActivity$date)
+modActivity$date <- as.Date(modActivity$date, format="%Y-%m-%d")
 
 head(modActivity)
 ```
@@ -182,7 +182,7 @@ Do these values differ from the estimates from the first part of the assignment?
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-**Answer:** Yes, the activity patterns differ between weekdays and weekends.
+**Answer:** Yes, the activity patterns differ between weekdays and weekends. There were higher levels of activity on the weekends.
 
 **1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.**
 

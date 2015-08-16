@@ -171,7 +171,7 @@ modActivity &lt;- merge(activity, avgIntervalSteps, by = &quot;interval&quot;, a
 modActivity[is.na(modActivity$steps), c(&quot;steps&quot;)] &lt;- modActivity[is.na(modActivity$steps), c(&quot;stepsMean&quot;)]
 modActivity &lt;- select(modActivity, steps, date, interval)
 modActivity &lt;- arrange(modActivity, date, interval)
-modActivity$date &lt;- as.Date(modActivity$date)
+modActivity$date &lt;- as.Date(modActivity$date, format=&quot;%Y-%m-%d&quot;)
 
 head(modActivity)</code></pre>
 <pre><code>##       steps       date interval
@@ -203,7 +203,7 @@ qplot(modDailySteps, xlab = &quot;Total Daily Steps&quot;, ylab = &quot;Frequenc
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
-<p><strong>Answer:</strong> Yes, the activity patterns differ between weekdays and weekends.</p>
+<p><strong>Answer:</strong> Yes, the activity patterns differ between weekdays and weekends. There were higher levels of activity on the weekends.</p>
 <p><strong>1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</strong></p>
 <pre class="r"><code>modActivity$daytype &lt;- as.factor(ifelse ( weekdays(modActivity$date) %in% c(&quot;Saturday&quot;,&quot;Sunday&quot;), &quot;weekend&quot;, &quot;weekday&quot; ) )</code></pre>
 <p><strong>2. Make a panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).</strong></p>
